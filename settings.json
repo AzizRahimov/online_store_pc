@@ -8,8 +8,8 @@
   "postgres_params": {
     "server": "localhost",
     "port": 5432,
-    "user": "postgres",
-    "password": "postgres",
+    "user": "app",
+    "password": "pass",
     "database": "db"
   }
 

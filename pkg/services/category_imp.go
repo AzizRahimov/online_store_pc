@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	models "github.com/AzizRahimov/online_store_pc/model"
 	"github.com/AzizRahimov/online_store_pc/pkg/repository"
 )
@@ -14,33 +13,18 @@ func NewCategoryServiceImp(repo repository.Category) *CategoryServiceImp {
 	return &CategoryServiceImp{repo: repo}
 }
 
-func (c *CategoryServiceImp) GetAllCategory() ([]models.ChildrenID, error) {
-	//ids, _ := c.repo.GetAllCategoryID()
-	parentIds, _ := c.repo.GetParentIDs()
+func (c *CategoryServiceImp) GetAllCategory() ([]models.Category, error) {
+	parents, _ := c.repo.GetChildrenIDs(0)
 
-	categories, err := c.repo.GetAllCategory()
-	if err != nil {
-		return nil, err
-	}
-	var childrenIDs []models.ChildrenID
-	var parentIDs []models.Category
-	//1,2,3
+	for i, p := range parents {
 
-	for _, parentID := range parentIds {
-		fmt.Println("parentID", parentID)
-		for _, category := range categories {
-			if parentID.ID == category.ParentID {
-				childrenIDs = append(childrenIDs, models.ChildrenID{
-					ID:    category.ID,
-					Title: category.Title,
-				})
-
-			}
-
+		ch1Arr, _ := c.repo.GetChildrenIDs(p.ID)
+		parents[i].CategoryChildren = ch1Arr
+		for i2, ch1 := range ch1Arr {
+			ch2Arr, _ := c.repo.GetChildrenIDs(ch1.ID)
+			ch1Arr[i2].CategoryChildren = ch2Arr
 		}
-
 	}
-	fmt.Println("parentIDs", parentIDs)
 
-	return childrenIDs, err
+	return parents, nil
 }

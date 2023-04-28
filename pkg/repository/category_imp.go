@@ -87,3 +87,24 @@ func (c *CategoryImp) GetParentIDs() ([]models.Category, error) {
 	return parentsCat, err
 
 }
+
+func (c *CategoryImp) GetChildrenIDs(id int) ([]models.Category, error) {
+	var categories []models.Category
+
+	query := fmt.Sprintf("SELECT id, name, parent_id FROM categories  WHERE  parent_id = $1  ORDER BY id ASC")
+	rows, err := c.db.Query(query, id)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var childrenID models.Category
+		err := rows.Scan(&childrenID.ID, &childrenID.Title, &childrenID.ParentID)
+		if err != nil {
+			return nil, err
+		}
+		categories = append(categories, childrenID)
+
+	}
+
+	return categories, nil
+}
