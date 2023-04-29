@@ -11,3 +11,8 @@
     "second_attribute_value": "3.3"
   }
 }
+
+
+// для поиска товара
+
+//localhost:9998/api/product/by_param/Общее количество ядер/17
