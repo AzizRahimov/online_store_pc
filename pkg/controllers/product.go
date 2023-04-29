@@ -80,3 +80,15 @@ func (p *ProductController) GetAllProducts(c echo.Context) error {
 	return c.JSON(http.StatusOK, products)
 
 }
+
+func (p *ProductController) GetProduct(c echo.Context) error {
+	firstParam := c.Param("first_attribute_name")
+	secondParam := c.Param("first_attribute_value")
+
+	products, err := p.productService.GetProduct(firstParam, secondParam)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.JSON(http.StatusOK, products)
+
+}

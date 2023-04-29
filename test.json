@@ -1,0 +1,13 @@
+//пример для создание продуктов
+
+{
+  "category_id": 3,
+  "name": "Процессор AMD Ryzen 9 7950X BOX",
+  "price": 56999,
+  "product_attributes":{
+    "first_attribute_name": "Общее количество ядер",
+    "first_attribute_value": "17",
+    "second_attribute_name": "Базовая частота процессора ГГц",
+    "second_attribute_value": "3.3"
+  }
+}

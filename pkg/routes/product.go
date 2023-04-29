@@ -19,4 +19,5 @@ func (r *ProductController) ProductRoute(group *echo.Group) {
 	router.DELETE("/delete/:id", r.productRouteController.DeleteProduct)
 	router.PUT("/update/:id", r.productRouteController.UpdateProduct)
 	router.GET("/all", r.productRouteController.GetAllProducts)
+	router.GET("/by_param/:first_attribute_name/:first_attribute_value", r.productRouteController.GetProduct)
 }

@@ -31,4 +31,5 @@ VALUES (1,  'Общее количество ядер', '14', 'Базовая ч
 
 SELECT p.id,c.name, p.name, pa.first_attribute_name, pa.first_attribute_value, pa.second_attribute_name, pa.second_attribute_value, p.price FROM  products p
 Join categories c on c.id = p.category_id
-JOIN product_attributes pa on p.id = pa.product_id;
+JOIN product_attributes pa on p.id = pa.product_id
+WHERE pa.first_attribute_name ILIKE 'Общее количество ядер' AND pa.first_attribute_value ILIKE '17';

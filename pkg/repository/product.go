@@ -7,4 +7,5 @@ type Product interface {
 	DeleteProduct(id int) error
 	UpdateProduct(product models.Product) error
 	GetAllProducts() ([]models.Product, error)
+	GetProduct(firstParam, secondParam string) ([]models.Product, error)
 }

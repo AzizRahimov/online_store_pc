@@ -31,3 +31,7 @@ func (p *ProductServiceImp) GetAllProducts() ([]models.Product, error) {
 	return p.repo.GetAllProducts()
 
 }
+func (p *ProductServiceImp) GetProduct(firstParam, secondParam string) ([]models.Product, error) {
+	return p.repo.GetProduct(firstParam, secondParam)
+
+}
