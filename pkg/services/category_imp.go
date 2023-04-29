@@ -14,10 +14,11 @@ func NewCategoryServiceImp(repo repository.Category) *CategoryServiceImp {
 }
 
 func (c *CategoryServiceImp) GetAllCategory() ([]models.Category, error) {
+
+	// берем сразу по дефолту родительский ID категорий
 	parents, _ := c.repo.GetChildrenIDs(0)
 
 	for i, p := range parents {
-
 		ch1Arr, _ := c.repo.GetChildrenIDs(p.ID)
 		parents[i].CategoryChildren = ch1Arr
 		for i2, ch1 := range ch1Arr {

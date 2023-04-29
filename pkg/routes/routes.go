@@ -19,7 +19,13 @@ func RunServerAndRoutes(db *sql.DB) {
 	categoryController := controllers.NewCategoryController(categoryService)
 	categoryControllerRoute := NewCategoryController(categoryController)
 	categoryControllerRoute.CategoryRoute(rc)
-	//e.GET("/", Home)
+
+	productRep := repository.NewProductImp(db)
+	productService := services.NewProductServiceImp(*productRep)
+	productController := controllers.NewProductController(productService)
+	productControllerRoute := NewProductController(productController)
+	productControllerRoute.ProductRoute(rc)
+
 	e.Start(":9998")
 
 }
