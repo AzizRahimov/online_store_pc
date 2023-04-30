@@ -9,7 +9,7 @@ import (
 )
 
 type Status struct {
-	Message string `json:"message"`
+	Message any `json:"message"`
 }
 
 type ProductController struct {
@@ -54,7 +54,7 @@ func (p *ProductController) UpdateProduct(c echo.Context) error {
 
 	idInt, err := strconv.Atoi(id)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
+		return c.JSON(http.StatusBadRequest, Status{Message: err})
 	}
 
 	err = c.Bind(&product)
@@ -65,7 +65,7 @@ func (p *ProductController) UpdateProduct(c echo.Context) error {
 	product.ID = idInt
 	err = p.productService.UpdateProduct(product)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, err.Error())
+		return c.JSON(http.StatusBadRequest, Status{Message: err.Error()})
 	}
 
 	return c.JSON(http.StatusOK, Status{Message: "Продукт успешно обновлен"})
@@ -75,7 +75,7 @@ func (p *ProductController) UpdateProduct(c echo.Context) error {
 func (p *ProductController) GetAllProducts(c echo.Context) error {
 	products, err := p.productService.GetAllProducts()
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
+		return c.JSON(http.StatusInternalServerError, Status{Message: err.Error()})
 	}
 	return c.JSON(http.StatusOK, products)
 
@@ -87,7 +87,7 @@ func (p *ProductController) GetProduct(c echo.Context) error {
 
 	products, err := p.productService.GetProduct(firstParam, secondParam)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, err.Error())
+		return c.JSON(http.StatusInternalServerError, Status{Message: err.Error()})
 	}
 	return c.JSON(http.StatusOK, products)
 
